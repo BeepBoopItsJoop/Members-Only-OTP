@@ -1,7 +1,7 @@
 #! /usr/bin/env node
 
-require('dotenv').config();
-const { Client } = require('pg');
+require("dotenv").config();
+const { Client } = require("pg");
 
 const SQL = `
 CREATE TABLE IF NOT EXISTS users (
@@ -21,18 +21,18 @@ CREATE TABLE IF NOT EXISTS posts (
   user_id INTEGER NOT NULL,
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
-`
+`;
 
 async function main() {
-     console.log("Schema creation started...");
-     const client = new Client({
-          connectionString: process.env.DB_CONNECTION_URL,
-     });
+  console.log("Schema creation started...");
+  const client = new Client({
+    connectionString: process.env.DB_CONNECTION_URL,
+  });
 
-     await client.connect();
-     await client.query(SQL);
-     await client.end();
-     console.log("... schema created successfully");
+  await client.connect();
+  await client.query(SQL);
+  await client.end();
+  console.log("... schema created successfully");
 }
 
 main();

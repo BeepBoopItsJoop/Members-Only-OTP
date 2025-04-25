@@ -1,27 +1,27 @@
-require('dotenv').config();
-const express = require('express');
+require("dotenv").config();
+const express = require("express");
 const app = express();
-const pool = require('./db/pool');
+const pool = require("./db/pool");
 
 const path = require("node:path");
 // Auth
-const passport = require('passport');
-const sessionObject = require('./auth/sessionConfig');
-const localStrategy = require('./auth/strategy');
+const passport = require("passport");
+const sessionObject = require("./auth/sessionConfig");
+const localStrategy = require("./auth/strategy");
 const { deserializer, serializer } = require("./auth/transformers.js");
 
-const globalErrorHandler= require('./middlewares/globalErrorHandler');
-const notFoundHandler = require('./middlewares/notFoundHandler.js');
-const provideUser = require('./middlewares/provideUser.js');
-const preventCache = require('./middlewares/preventCache.js');
+const globalErrorHandler = require("./middlewares/globalErrorHandler");
+const notFoundHandler = require("./middlewares/notFoundHandler.js");
+const provideUser = require("./middlewares/provideUser.js");
+const preventCache = require("./middlewares/preventCache.js");
 
-const indexRouter = require('./routes/indexRouter');
+const indexRouter = require("./routes/indexRouter");
 
 app.set("views", path.join(__dirname, "views"));
-app.set('view engine', 'ejs')
+app.set("view engine", "ejs");
 
 // Middlewares
-app.use(express.static('public'));
+app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 // Session
 app.use(sessionObject);
@@ -40,7 +40,7 @@ passport.deserializeUser(deserializer);
 
 app.use(globalErrorHandler);
 
-// TODO: 404 handler     
+// TODO: 404 handler
 app.use(notFoundHandler);
 
 const PORT = process.env.PORT || 3000;

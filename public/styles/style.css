@@ -1,78 +1,78 @@
 :root {
-     --accent-color: #7cdedc;     
-     --background-color: #a9b3ce; 
-     --primary-color: #9e788f;    
-     --secondary-color: #7284a8;  
-     --text-color: #383838;
-     /* idk */
-     --charcoal: #474954;    
-     
-     --text-forprimary: #2c2c2c;
-   }
+  --accent-color: #7cdedc;
+  --background-color: #a9b3ce;
+  --primary-color: #9e788f;
+  --secondary-color: #7284a8;
+  --text-color: #383838;
+  /* idk */
+  --charcoal: #474954;
+
+  --text-forprimary: #2c2c2c;
+}
 
 * {
-     margin: 0;
-     padding: 0;
-     box-sizing: border-box;
-     font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
 }
 
 a {
-     text-decoration: none;
-     color: var(--accent-color);
+  text-decoration: none;
+  color: var(--accent-color);
 }
 
 ul {
-     list-style: none;
+  list-style: none;
 }
 
 nav {
-     background-color: var(--secondary-color);
-     display: flex;
-     flex-direction: row;
-     justify-content: space-between;
-     /* align-items    : center; */
-     padding: 1em 2em;
+  background-color: var(--secondary-color);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  /* align-items    : center; */
+  padding: 1em 2em;
 }
 
 nav ul {
-     display: flex;
-     gap: 3em;
+  display: flex;
+  gap: 3em;
 }
 
 main {
-     background-color: var(--background-color);
-     color: var(--text-color);
-     /* display: flex; */
-     /* align-items: center; */
-     /* justify-content: center; */
-     min-height: 100vh;    
+  background-color: var(--background-color);
+  color: var(--text-color);
+  /* display: flex; */
+  /* align-items: center; */
+  /* justify-content: center; */
+  min-height: 100vh;
 }
 
 main ul {
-     display: grid;
-     grid-template-columns: repeat(3, minmax(1em, 1fr));
-     padding: 1em;
-     margin: 2em;
-     gap: 2em;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(1em, 1fr));
+  padding: 1em;
+  margin: 2em;
+  gap: 2em;
 }
 
 main li {
-     background-color: var(--primary-color);
-     color: var(--text-forprimary);
+  background-color: var(--primary-color);
+  color: var(--text-forprimary);
 
-     min-height: 10em;
-     max-width: 35em;
+  min-height: 10em;
+  max-width: 35em;
 
-     padding: 1em 2em;
-     display: flex;
-     flex-direction: column;
+  padding: 1em 2em;
+  display: flex;
+  flex-direction: column;
 }
 
 a.back {
-     border-bottom: red;
+  border-bottom: red;
 }
 
 a.back::before {
-     content: '>';
+  content: ">";
 }

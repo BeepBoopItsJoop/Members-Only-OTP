@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-     "dev": "node --watch --inspect app.js",
-     "schema-creation": "node db/schema.js"
-},
+    "dev": "node --watch --inspect app.js",
+    "schema-creation": "node db/schema.js"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -22,6 +22,7 @@
     "express-validator": "^7.2.1",
     "passport": "^0.7.0",
     "passport-local": "^1.0.0",
-    "pg": "^8.14.1"
+    "pg": "^8.14.1",
+    "prettier": "^3.5.3"
   }
 }
