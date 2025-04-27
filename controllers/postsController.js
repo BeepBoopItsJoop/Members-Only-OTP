@@ -9,6 +9,8 @@ const postsListGet = async (req, res, next) => {
   res.render("postsPage", { posts: posts });
 };
 
+// const postGet
+
 module.exports = {
   postsListGet,
 };

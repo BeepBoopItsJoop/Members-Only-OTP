@@ -3,4 +3,12 @@ const provideUser = (req, res, next) => {
   next();
 };
 
-module.exports = provideUser;
+const provideSession = (req, res, next) => {
+     res.locals.currentSession = req.session;
+     next();
+}
+
+module.exports = {
+     provideUser,
+     provideSession,
+};
