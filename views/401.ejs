@@ -3,13 +3,13 @@
 <head>
      <meta charset="UTF-8">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <title>Not found</title>
+     <title>Unauthorized</title>
      <link rel="stylesheet" href="/styles/style.css">
 </head>
 <body>
      <%- include("partials/nav"); %>
 
-     <span>lol 404 not found buddy</span> <br>
-     <span><%= locals.error?.message %></span>
+     <span>lol 401 unauthorized</span>
+     <span><%- locals.message %></span>
 </body>
 </html>

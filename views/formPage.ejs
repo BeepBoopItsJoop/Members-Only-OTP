@@ -5,7 +5,7 @@
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <% const routeText = (locals.route === "register") ? "Register" : "Log in"; %>
      <title><%- routeText %></title>
-     <link rel="stylesheet" href="styles/style.css">
+     <link rel="stylesheet" href="/styles/style.css">
 </head>
 <body>
      <%- include("partials/nav"); %>
@@ -34,8 +34,14 @@
                <input id="confirmpassword" name="confirmpassword" type="password" required
                value="<%= (locals.item?.confirmpassword) ? item.confirmpassword : "" %>" />
           <% } %>
-               
+
+          
           <button type="submit"><%- routeText %></button>
      </form>
+     <% if(locals.route == "register") { %>
+          <span>Already have an account? <a href="/log-in">Log in</a></span>
+          <% } else {%>
+          <span>Don't have an account? <a href="/register">Register</a></span>
+     <% } %>     
 </body>
 </html>

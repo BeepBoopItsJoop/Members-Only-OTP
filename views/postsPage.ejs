@@ -4,20 +4,38 @@
      <meta charset="UTF-8">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <title>Member posts</title>
-     <link rel="stylesheet" href="styles/style.css">
+     <link rel="stylesheet" href="/styles/style.css">
 </head>
 <body>
      <%- include("partials/nav"); %>
 
+     <% if(!locals.currentUser) { %>
+          <a href="/log-in">Log in to post</a>
+     <% } else { %>
+          <%- include("partials/errors") %>
+          <form action="/posts/new" method="POST">
+               <label for="posttitle">Title</label>
+               <input type="text" name="posttitle" id="posttitle" required
+               value="<%= locals.item?.posttitle || "" %>">
+
+               <label for="postbody">Content</label>
+               <textarea name="postbody" id="postbody" rows="5" placeholder="Write something nice"
+               value="<%= locals.item?.postbody || "" %>"
+               > </textarea>
+
+               <button type="submit">Post</button>
+          </form>
+     <% } %>
+
      <% if(!locals.posts || locals.posts?.length === 0) { %>
-          <span>No posts found!</span>
-          <!-- TODO: create one? if membeer -->
+          <span>No posts found!</span> <br>
      <% } else { %>
           <ul>
                <% locals.posts?.forEach(post => { %>
                     <li>
                          <span><%= post.title %></span> <br>
-                         <span>By <%= post.user_name %></span> <br>
+                         <span>By <%= post.user_name || "???" %></span> <br>
+                         <span>Posted on <%= (post.timestamp) ? new Date(post.timestamp) : "???" %></span> <br>
                          <span><%= post.text %></span> <br>
                     </li>
                <% }) %>

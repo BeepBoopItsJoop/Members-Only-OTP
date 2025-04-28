@@ -20,4 +20,6 @@ indexRouter.get("/secret", indexController.secretGet);
 
 indexRouter.use("/posts", postsRouter);
 
+//  get membership
+
 module.exports = indexRouter;

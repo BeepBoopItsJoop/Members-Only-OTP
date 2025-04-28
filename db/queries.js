@@ -12,6 +12,18 @@ const postList = async () => {
   return rows;
 };
 
+const postListNoInfo = async () => {
+  const SQL = `
+     SELECT posts.id, posts.title, posts.text, posts.user_id
+     FROM posts 
+     JOIN users
+     ON (posts.user_id = users.id);
+     `;
+
+  const { rows } = await pool.query(SQL);
+  return rows;
+};
+
 const userByUsername = async (username) => {
   const SQL = `
      SELECT users.id, users.user_name, users.display_name, users.password, users.member, users.admin 
@@ -42,13 +54,23 @@ const addUser = async (username, displayName, password) => {
   const SQL = `
      INSERT INTO users (user_name, display_name, password) VALUES ($1, $2, $3);
      `;
-
-  await pool.query(SQL, [username, displayName, password]);
+     
+     await pool.query(SQL, [username, displayName, password]);
 };
+
+const addPost = async (title, body, authorID) => {
+     const SQL = `
+          INSERT INTO posts (title, text, user_id, timestamp) VALUES ($1, $2, $3, $4);
+     `;
+
+     await pool.query(SQL, [title, body, authorID, new Date()]);
+}
 
 module.exports = {
   postList,
+  postListNoInfo,
   userByUsername,
   userByID,
   addUser,
+  addPost,
 };

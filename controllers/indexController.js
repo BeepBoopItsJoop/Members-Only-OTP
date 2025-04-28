@@ -31,7 +31,7 @@ const registerPost = [
           const hashedPassword = await bcrypt.hash(password, 10);
 
           await db.addUser(username, displayname, hashedPassword);
-          res.redirect("/");
+          res.redirect("/log-in");
      })
 ];
 
