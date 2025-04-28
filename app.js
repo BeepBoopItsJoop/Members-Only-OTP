@@ -24,6 +24,7 @@ app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 // Session
+// TODO: research whether sending hashed password in session object is a thing that should be done
 app.use(sessionObject);
 app.use(passport.session());
 // Prevent caching so user cant go back to protected route after logging out
@@ -43,7 +44,6 @@ passport.deserializeUser(deserializer);
 
 app.use(globalErrorHandler);
 
-// TODO: 404 handler
 app.use(notFoundHandler);
 
 const PORT = process.env.PORT || 3000;

@@ -2,7 +2,8 @@ const pool = require("./pool");
 
 const postList = async () => {
   const SQL = `
-     SELECT posts.id, posts.title, posts.timestamp, posts.text, posts.user_id, users.user_name AS user_name
+     SELECT posts.id, posts.title, posts.text, posts.user_id, 
+     posts.timestamp, users.user_name AS user_name
      FROM posts 
      JOIN users
      ON (posts.user_id = users.id);
@@ -23,6 +24,33 @@ const postListNoInfo = async () => {
   const { rows } = await pool.query(SQL);
   return rows;
 };
+
+const postListByUser = async (id) => {
+     const SQL = `
+     SELECT posts.id, posts.title, posts.text, posts.user_id, 
+     posts.timestamp, users.user_name AS user_name
+     FROM posts
+     LEFT JOIN users
+     ON (posts.user_id = users.id)
+     WHERE posts.user_id = $1;
+     `;
+
+     const { rows } = await pool.query(SQL, [id]);
+     return rows
+}
+
+const postListByUserNoInfo = async (id) => {
+     const SQL = `
+     SELECT posts.id, posts.title, posts.text, posts.user_id
+     FROM posts
+     LEFT JOIN users
+     ON (posts.user_id = users.id)
+     WHERE posts.user_id = $1;
+     `;
+
+     const { rows } = await pool.query(SQL, [id]);
+     return rows
+}
 
 const userByUsername = async (username) => {
   const SQL = `
@@ -69,6 +97,8 @@ const addPost = async (title, body, authorID) => {
 module.exports = {
   postList,
   postListNoInfo,
+  postListByUser,
+  postListByUserNoInfo,
   userByUsername,
   userByID,
   addUser,

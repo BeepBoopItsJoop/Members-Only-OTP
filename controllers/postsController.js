@@ -35,9 +35,6 @@ const postCreatePost = [
 ]
 
 
-// TODO:
-// postlistget - only show author and post time if member
-
 module.exports = {
      postsListGet,
      postCreatePost,

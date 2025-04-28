@@ -30,16 +30,7 @@
      <% if(!locals.posts || locals.posts?.length === 0) { %>
           <span>No posts found!</span> <br>
      <% } else { %>
-          <ul>
-               <% locals.posts?.forEach(post => { %>
-                    <li>
-                         <span><%= post.title %></span> <br>
-                         <span>By <%= post.user_name || "???" %></span> <br>
-                         <span>Posted on <%= (post.timestamp) ? new Date(post.timestamp) : "???" %></span> <br>
-                         <span><%= post.text %></span> <br>
-                    </li>
-               <% }) %>
-          </ul>
+          <%- include("partials/postList") %>
      <% } %>
 </body>
 </html>

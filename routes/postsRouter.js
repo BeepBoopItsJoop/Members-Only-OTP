@@ -9,7 +9,8 @@ postsRouter.get("/", postController.postsListGet);
 
 postsRouter.post("/new", checkIfMember, postController.postCreatePost);
 
-// TODO:
-// postcreatepost
+// TODO: Delete if admin
+
+// TODO: Add comments - db schema, form in view, add method
 
 module.exports = postsRouter;

@@ -1,13 +1,14 @@
 const globalErrorHandler = (err, req, res, next) => {
-  console.log("test - global error");
-  console.error(err);
+  console.error("Global error handler ->", err);
 
   if (err.statusCode === 404) {
     res.status(404);
     return res.render("404", { error: err });
   }
 
-  res.status(500).send("Something went wrong");
+
+  res.status(500);
+  res.render("500", { error: err });
 };
 
 module.exports = globalErrorHandler;

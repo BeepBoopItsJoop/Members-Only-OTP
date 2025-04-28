@@ -2,9 +2,10 @@ const { Router } = require("express");
 
 const indexRouter = Router();
 const postsRouter = require("./postsRouter");
+
 const indexController = require("../controllers/indexController");
 
-const passport = require("passport");
+indexRouter.use("/posts", postsRouter);
 
 indexRouter.get("/", indexController.homeGet);
 
@@ -16,10 +17,13 @@ indexRouter.post("/log-in", indexController.logInPost);
 
 indexRouter.get("/log-out", indexController.logOutGet);
 
-indexRouter.get("/secret", indexController.secretGet);
+indexRouter.param('id', indexController.validateParamId);
 
-indexRouter.use("/posts", postsRouter);
+// TODO: Profile tab
+indexRouter.get("/profile/:id", indexController.profileGet);
 
-//  get membership
+// TODO: Become member
+// TODO: Become admin
+
 
 module.exports = indexRouter;

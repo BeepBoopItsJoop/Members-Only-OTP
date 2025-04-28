@@ -57,13 +57,28 @@ const logOutGet = (req, res, next) => {
   });
 };
 
-const secretGet = (req, res) => {
-  if (req.isAuthenticated()) {
-    res.send("logged in");
-  } else {
-    res.send("not logged in");
-  }
-};
+const validateParamId = (req, res, next, id) => {
+     if(isNaN(id)) {
+          res.render("400", { message: "ID parameter must be a number" });
+     } else {
+          next();
+     }
+}
+
+const profileGet = async (req, res) => {
+     const profileID = req.params.id;
+     const user = await db.userByID(profileID);
+     const posts = (req.user?.member) 
+     ? (await db.postListByUser(profileID))
+     : (await db.postListByUserNoInfo(profileID));
+     console.log(posts);
+
+     if(!user) {
+          res.render("404", { error: new Error("User can't be found") });
+     }
+     
+     res.render("profilePage", { user: user, posts: posts});
+}
 
 module.exports = {
   homeGet,
@@ -72,5 +87,6 @@ module.exports = {
   logInGet,
   logInPost,
   logOutGet,
-  secretGet,
+  validateParamId,
+  profileGet,
 };

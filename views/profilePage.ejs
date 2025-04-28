@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+     <meta charset="UTF-8">
+     <title>Profile of user yes</title>
+     <link rel="stylesheet" href="/styles/style.css">
+</head>
+
+<body>
+     <%- include("partials/nav"); %>
+
+     <div>
+          <span><%= locals.user.display_name %></span>
+          <% if(locals.user.member) { %>
+               <span>Member</span>
+          <% } %>
+          <%- include("partials/postList") %>
+     </div>
+</body>
+
+</html>
