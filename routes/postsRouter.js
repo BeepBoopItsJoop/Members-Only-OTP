@@ -1,6 +1,6 @@
 const { Router } = require("express");
 
-const { checkAuthenticaiton, checkIfMember, checkIfAdmin } = require("../middlewares/authenticator");
+const { checkAuthentication, checkIfMember, checkIfAdmin } = require("../middlewares/authenticator");
 
 const postsRouter = Router();
 const postController = require("../controllers/postsController");

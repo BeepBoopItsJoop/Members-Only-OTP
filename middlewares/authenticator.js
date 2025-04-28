@@ -1,4 +1,4 @@
-const checkAuthenticaiton = (req, res, next) => {
+const checkAuthentication = (req, res, next) => {
      if(req.isAuthenticated()) {
           return next();
      } 
@@ -20,7 +20,7 @@ const checkIfAdmin = (req, res, next) => {
 }
 
 module.exports = {
-     checkAuthenticaiton,
+     checkAuthentication,
      checkIfMember,
      checkIfAdmin,
 }

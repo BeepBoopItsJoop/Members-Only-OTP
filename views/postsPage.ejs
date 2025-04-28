@@ -11,6 +11,8 @@
 
      <% if(!locals.currentUser) { %>
           <a href="/log-in">Log in to post</a>
+     <% } else if(!locals?.currentUser.member) { %>
+          <a href="/become-member">Become a member to post</a>
      <% } else { %>
           <%- include("partials/errors") %>
           <form action="/posts/new" method="POST">

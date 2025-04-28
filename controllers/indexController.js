@@ -80,6 +80,19 @@ const profileGet = async (req, res) => {
      res.render("profilePage", { user: user, posts: posts});
 }
 
+const becomeMemberGet = (req, res) => {
+     if(req.user.member) {
+          return res.redirect("/posts");
+     };
+     res.render("membershipPage");
+}
+
+const becomeMemberPost = async (req, res) => {
+     const id = req.user.id;
+     await db.updateUserMember(id);
+     res.redirect("/posts");
+}
+
 module.exports = {
   homeGet,
   registerGet,
@@ -89,4 +102,6 @@ module.exports = {
   logOutGet,
   validateParamId,
   profileGet,
+  becomeMemberGet,
+  becomeMemberPost,
 };

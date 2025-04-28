@@ -94,6 +94,14 @@ const addPost = async (title, body, authorID) => {
      await pool.query(SQL, [title, body, authorID, new Date()]);
 }
 
+const updateUserMember = async(id) => {
+     const SQL = `
+     UPDATE users SET member = true 
+     WHERE id = $1;
+     `;
+     return await pool.query(SQL, [id]);
+}
+
 module.exports = {
   postList,
   postListNoInfo,
@@ -103,4 +111,5 @@ module.exports = {
   userByID,
   addUser,
   addPost,
+  updateUserMember
 };

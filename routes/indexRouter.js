@@ -4,6 +4,7 @@ const indexRouter = Router();
 const postsRouter = require("./postsRouter");
 
 const indexController = require("../controllers/indexController");
+const { checkAuthentication } = require("../middlewares/authenticator");
 
 indexRouter.use("/posts", postsRouter);
 
@@ -18,11 +19,11 @@ indexRouter.post("/log-in", indexController.logInPost);
 indexRouter.get("/log-out", indexController.logOutGet);
 
 indexRouter.param('id', indexController.validateParamId);
-
-// TODO: Profile tab
 indexRouter.get("/profile/:id", indexController.profileGet);
 
-// TODO: Become member
+indexRouter.get("/become-member", checkAuthentication, indexController.becomeMemberGet);
+indexRouter.post("/become-member", checkAuthentication, indexController.becomeMemberPost);
+
 // TODO: Become admin
 
 
