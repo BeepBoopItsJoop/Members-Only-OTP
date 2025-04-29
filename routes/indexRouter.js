@@ -24,7 +24,7 @@ indexRouter.get("/profile/:id", indexController.profileGet);
 indexRouter.get("/become-member", checkAuthentication, indexController.becomeMemberGet);
 indexRouter.post("/become-member", checkAuthentication, indexController.becomeMemberPost);
 
-// TODO: Become admin
-
+indexRouter.get("/become-admin", checkAuthentication, indexController.becomeAdminGet);
+indexRouter.post("/become-admin", checkAuthentication, indexController.becomeAdminPost);
 
 module.exports = indexRouter;

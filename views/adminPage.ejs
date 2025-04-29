@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+     <meta charset="UTF-8">
+     <title>Profile of user yes</title>
+     <link rel="stylesheet" href="/styles/style.css">
+</head>
+
+<body>
+     <%- include("partials/nav"); %>
+
+     <form action="/become-admin" method="POST">
+          <label for="secretcode">Type the following text to become an admin:</label>
+          <span>I swear not to abuse this power and wreck a lovely developer's production database (please)</span>
+          <input type="text" name="secretcode" id="secretcode">
+
+          <button type="submit">Become admin</button>
+     </form>
+</body>
+
+</html>

@@ -52,6 +52,39 @@ const postListByUserNoInfo = async (id) => {
      return rows
 }
 
+const post = async (post_id) => {
+     const SQL = `
+     SELECT posts.id, posts.title, posts.text, posts.user_id, 
+     posts.timestamp, users.user_name AS user_name
+     FROM posts JOIN users
+     ON (posts.user_id = users.id)
+     WHERE posts.id = $1;
+     `;
+     const { rows } = await pool.query(SQL, [post_id]);
+     return rows[0];
+}
+
+const postNoInfo = async (post_id) => {
+     const SQL = `
+     SELECT posts.id, posts.title, posts.text, posts.user_id
+     FROM posts JOIN users
+     ON (posts.user_id = users.id)
+     WHERE posts.id = $1;
+     `;
+
+     const { rows } = await pool.query(SQL, [post_id]);
+     return rows[0];
+}
+
+const deletePost = async (post_id) => {
+     const SQL = `
+     DELETE FROM posts
+     WHERE id = $1;
+     `;
+
+     await pool.query(SQL, [post_id]);
+}
+
 const userByUsername = async (username) => {
   const SQL = `
      SELECT users.id, users.user_name, users.display_name, users.password, users.member, users.admin 
@@ -99,7 +132,15 @@ const updateUserMember = async(id) => {
      UPDATE users SET member = true 
      WHERE id = $1;
      `;
-     return await pool.query(SQL, [id]);
+     await pool.query(SQL, [id]);
+}
+
+const updateUserAdmin = async(id) => {
+     const SQL = `
+     UPDATE users SET admin = true
+     WHERE id = $1;
+     `;
+     await pool.query(SQL, [id]);
 }
 
 module.exports = {
@@ -107,9 +148,13 @@ module.exports = {
   postListNoInfo,
   postListByUser,
   postListByUserNoInfo,
+  post,
+  postNoInfo,
+  deletePost,
   userByUsername,
   userByID,
   addUser,
   addPost,
-  updateUserMember
+  updateUserMember,
+  updateUserAdmin,
 };

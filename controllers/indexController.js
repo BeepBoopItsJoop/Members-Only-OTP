@@ -84,6 +84,7 @@ const becomeMemberGet = (req, res) => {
      if(req.user.member) {
           return res.redirect("/posts");
      };
+     // TODO: change this to confirmation page
      res.render("membershipPage");
 }
 
@@ -91,6 +92,22 @@ const becomeMemberPost = async (req, res) => {
      const id = req.user.id;
      await db.updateUserMember(id);
      res.redirect("/posts");
+}
+
+const becomeAdminGet = (req, res) => {
+     if(req.user.admin) {
+          return res.redirect("/posts");
+     };
+     res.render("adminPage");
+}
+
+const becomeAdminPost = async (req, res) => {
+     const { secretcode: secret } = req.body;
+     if(secret?.trim() === "I swear not to abuse this power and wreck a lovely developer's production database (please)") {
+          await db.updateUserAdmin(req.user.id);
+          return res.redirect("/posts"); 
+     }
+     res.redirect("/become-admin");
 }
 
 module.exports = {
@@ -104,4 +121,6 @@ module.exports = {
   profileGet,
   becomeMemberGet,
   becomeMemberPost,
+  becomeAdminGet,
+  becomeAdminPost,
 };
