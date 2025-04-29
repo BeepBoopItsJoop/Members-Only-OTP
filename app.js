@@ -12,7 +12,7 @@ const { deserializer, serializer } = require("./auth/transformers.js");
 
 const globalErrorHandler = require("./middlewares/globalErrorHandler");
 const notFoundHandler = require("./middlewares/notFoundHandler.js");
-const { provideUser, provideSession} = require("./middlewares/provideUser.js");
+const { provideUser, provideSession } = require("./middlewares/provideUser.js");
 const preventCache = require("./middlewares/preventCache.js");
 
 const indexRouter = require("./routes/indexRouter");
@@ -31,8 +31,8 @@ app.use(passport.session());
 app.use(preventCache);
 // Have currentUser and currentSession accessable everywhere and in views
 app.use(
-     provideUser,
-     //  provideSession
+  provideUser,
+  //  provideSession
 );
 
 // Routes

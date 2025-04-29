@@ -26,7 +26,7 @@ const postListNoInfo = async () => {
 };
 
 const postListByUser = async (id) => {
-     const SQL = `
+  const SQL = `
      SELECT posts.id, posts.title, posts.text, posts.user_id, 
      posts.timestamp, users.user_name AS user_name
      FROM posts
@@ -35,12 +35,12 @@ const postListByUser = async (id) => {
      WHERE posts.user_id = $1;
      `;
 
-     const { rows } = await pool.query(SQL, [id]);
-     return rows
-}
+  const { rows } = await pool.query(SQL, [id]);
+  return rows;
+};
 
 const postListByUserNoInfo = async (id) => {
-     const SQL = `
+  const SQL = `
      SELECT posts.id, posts.title, posts.text, posts.user_id
      FROM posts
      LEFT JOIN users
@@ -48,42 +48,42 @@ const postListByUserNoInfo = async (id) => {
      WHERE posts.user_id = $1;
      `;
 
-     const { rows } = await pool.query(SQL, [id]);
-     return rows
-}
+  const { rows } = await pool.query(SQL, [id]);
+  return rows;
+};
 
 const post = async (post_id) => {
-     const SQL = `
+  const SQL = `
      SELECT posts.id, posts.title, posts.text, posts.user_id, 
      posts.timestamp, users.user_name AS user_name
      FROM posts JOIN users
      ON (posts.user_id = users.id)
      WHERE posts.id = $1;
      `;
-     const { rows } = await pool.query(SQL, [post_id]);
-     return rows[0];
-}
+  const { rows } = await pool.query(SQL, [post_id]);
+  return rows[0];
+};
 
 const postNoInfo = async (post_id) => {
-     const SQL = `
+  const SQL = `
      SELECT posts.id, posts.title, posts.text, posts.user_id
      FROM posts JOIN users
      ON (posts.user_id = users.id)
      WHERE posts.id = $1;
      `;
 
-     const { rows } = await pool.query(SQL, [post_id]);
-     return rows[0];
-}
+  const { rows } = await pool.query(SQL, [post_id]);
+  return rows[0];
+};
 
 const deletePost = async (post_id) => {
-     const SQL = `
+  const SQL = `
      DELETE FROM posts
      WHERE id = $1;
      `;
 
-     await pool.query(SQL, [post_id]);
-}
+  await pool.query(SQL, [post_id]);
+};
 
 const userByUsername = async (username) => {
   const SQL = `
@@ -115,33 +115,33 @@ const addUser = async (username, displayName, password) => {
   const SQL = `
      INSERT INTO users (user_name, display_name, password) VALUES ($1, $2, $3);
      `;
-     
-     await pool.query(SQL, [username, displayName, password]);
+
+  await pool.query(SQL, [username, displayName, password]);
 };
 
 const addPost = async (title, body, authorID) => {
-     const SQL = `
+  const SQL = `
           INSERT INTO posts (title, text, user_id, timestamp) VALUES ($1, $2, $3, $4);
      `;
 
-     await pool.query(SQL, [title, body, authorID, new Date()]);
-}
+  await pool.query(SQL, [title, body, authorID, new Date()]);
+};
 
-const updateUserMember = async(id) => {
-     const SQL = `
+const updateUserMember = async (id) => {
+  const SQL = `
      UPDATE users SET member = true 
      WHERE id = $1;
      `;
-     await pool.query(SQL, [id]);
-}
+  await pool.query(SQL, [id]);
+};
 
-const updateUserAdmin = async(id) => {
-     const SQL = `
+const updateUserAdmin = async (id) => {
+  const SQL = `
      UPDATE users SET admin = true
      WHERE id = $1;
      `;
-     await pool.query(SQL, [id]);
-}
+  await pool.query(SQL, [id]);
+};
 
 module.exports = {
   postList,

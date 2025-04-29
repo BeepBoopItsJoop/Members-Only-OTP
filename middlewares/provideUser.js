@@ -4,11 +4,11 @@ const provideUser = (req, res, next) => {
 };
 
 const provideSession = (req, res, next) => {
-     res.locals.currentSession = req.session;
-     next();
-}
+  res.locals.currentSession = req.session;
+  next();
+};
 
 module.exports = {
-     provideUser,
-     provideSession,
+  provideUser,
+  provideSession,
 };
