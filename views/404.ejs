@@ -5,11 +5,14 @@
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <title>Not found</title>
      <link rel="stylesheet" href="/styles/style.css">
+     <link rel="stylesheet" href="/styles/reset.css">
 </head>
 <body>
      <%- include("partials/nav"); %>
 
-     <span>lol 404 not found buddy</span> <br>
-     <span><%= locals.error?.message %></span>
+     <main>
+       <p>lol 404 not found buddy</p>
+       <p><%= locals.error?.message %></p>
+     </main>
 </body>
 </html>

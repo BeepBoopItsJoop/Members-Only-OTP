@@ -5,11 +5,14 @@
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <title>Unauthorized</title>
      <link rel="stylesheet" href="/styles/style.css">
+     <link rel="stylesheet" href="/styles/reset.css">
 </head>
 <body>
      <%- include("partials/nav"); %>
 
-     <span>lol 400 bad request</span>
-     <span><%- locals.message %></span>
+     <main>
+       <p>lol 400 bad request</p>
+       <p><%- locals.message %></p>
+     </main>
 </body>
 </html>

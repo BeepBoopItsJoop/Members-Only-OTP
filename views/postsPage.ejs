@@ -4,35 +4,43 @@
      <meta charset="UTF-8">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <title>Member posts</title>
+     <link rel="stylesheet" href="/styles/reset.css">
      <link rel="stylesheet" href="/styles/style.css">
 </head>
 <body>
      <%- include("partials/nav"); %>
 
-     <% if(!locals.currentUser) { %>
-          <a href="/log-in">Log in to post</a>
-     <% } else if(!locals?.currentUser.member) { %>
-          <a href="/become-member">Become a member to post</a>
-     <% } else { %>
-          <%- include("partials/errors") %>
-          <form action="/posts/new" method="POST">
-               <label for="posttitle">Title</label>
-               <input type="text" name="posttitle" id="posttitle" required
-               value="<%= locals.item?.posttitle || "" %>">
+     <main>
+      <!-- TODO: Style this part -->
+       <% if(!locals.currentUser) { %>
+            <a href="/log-in">Log in to post</a>
+       <% } else if(!locals?.currentUser.member) { %>
+            <a href="/become-member">Become a member to post</a>
+       <% } else { %>
+            <%- include("partials/errors") %>
+            <form class="post" action="/posts/new" method="POST">
+                 <div class="input-wrapper">
+                   <label for="posttitle">Title</label>
+                   <input type="text" name="posttitle" id="posttitle" required
+                   value="<%= locals.item?.posttitle || "" %>">
+                 </div>
 
-               <label for="postbody">Content</label>
-               <textarea name="postbody" id="postbody" rows="5" placeholder="Write something nice"
-               value="<%= locals.item?.postbody || "" %>"
-               > </textarea>
+                 <div class="input-wrapper">
+                   <label for="postbody">Content</label>
+                   <textarea name="postbody" id="postbody" rows="5" required
+                   value="<%= locals.item?.postbody || "" %>"
+                   > </textarea>
+                 </div>
 
-               <button type="submit">Post</button>
-          </form>
-     <% } %>
-
-     <% if(!locals.posts || locals.posts?.length === 0) { %>
-          <span>No posts found!</span> <br>
-     <% } else { %>
-          <%- include("partials/postList") %>
-     <% } %>
+                 <button type="submit">Post</button>
+            </form>
+       <% } %>
+       <% if(!locals.posts || locals.posts?.length === 0) { %>
+        <!-- TODO: Style no posts found -->
+            <span>No posts found!</span> <br>
+       <% } else { %>
+            <%- include("partials/postList") %>
+       <% } %>
+     </main>  
 </body>
 </html>

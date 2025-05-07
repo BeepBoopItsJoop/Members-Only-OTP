@@ -71,7 +71,6 @@ const profileGet = async (req, res) => {
   const posts = req.user?.member
     ? await db.postListByUser(profileID)
     : await db.postListByUserNoInfo(profileID);
-  console.log(posts);
 
   if (!user) {
     res.render("404", { error: new Error("User can't be found") });
@@ -84,7 +83,6 @@ const becomeMemberGet = (req, res) => {
   if (req.user.member) {
     return res.redirect("/posts");
   }
-  // TODO: change this to confirmation page
   res.render("membershipPage");
 };
 

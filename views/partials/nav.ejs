@@ -1,18 +1,19 @@
-<nav>
-     <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/posts">Posts</a></li>
-     </ul>
-     <ul>
-          <!-- If logged in  -->
-          <% if(locals.currentUser) { %>
-               <li><a href="/profile/<%- currentUser.id %>"> <%- currentUser.user_name || "profile" %> </a></li>
-               <li><a href="/log-out">Log out</a></li>
-               <!-- TODO: profile button -->
-          <% } else {%>
-          <!-- if not logged in -->
-               <li><a href="/log-in">Log in</a></li>
-               <li><a href="/register">Register</a></li>
-          <% } %>
-     </ul>
-</nav>
+<header>
+  <nav>
+       <ul role="list">
+            <li><a href="/">Home</a></li>
+            <li><a href="/posts">Posts</a></li>
+       </ul>
+       <ul role="list">
+            <!-- If logged in  -->
+            <% if(locals.currentUser) { %>
+                 <li class="profile"><a href="/profile/<%- currentUser.id %>"> <%- currentUser.user_name || "profile" %> </a></li>
+                 <li><a href="/log-out">Log out</a></li>
+            <% } else {%>
+            <!-- if not logged in -->
+                 <li><a href="/log-in">Log in</a></li>
+                 <li><a href="/register">Register</a></li>
+            <% } %>
+       </ul>
+  </nav>
+</header>

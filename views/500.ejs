@@ -4,12 +4,15 @@
      <meta charset="UTF-8">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <title>Server error</title>
+     <link rel="stylesheet" href="/styles/reset.css">
      <link rel="stylesheet" href="/styles/style.css">
 </head>
 <body>
      <%- include("partials/nav"); %>
 
-     <span>lol 500 something went wrong</span> <br>
-     <pre> <%= error.stack %> </pre>
+     <main>
+       <p>lol 500 something went wrong</p>
+       <pre> <%= error.stack %> </pre>
+     </main>
 </body>
 </html>

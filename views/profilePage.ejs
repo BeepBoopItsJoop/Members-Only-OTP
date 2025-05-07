@@ -4,19 +4,23 @@
 <head>
      <meta charset="UTF-8">
      <title>Profile of user yes</title>
+     <link rel="stylesheet" href="/styles/reset.css">
      <link rel="stylesheet" href="/styles/style.css">
 </head>
 
 <body>
      <%- include("partials/nav"); %>
 
-     <div>
-          <span><%= locals.user.display_name %></span>
-          <% if(locals.user.member) { %>
-               <span>Member</span>
-          <% } %>
+     <main>
+          <div class="post">
+            <h3><%= locals.user.display_name %></h3>
+            <% if(locals.user.member) { %>
+                 <p>Member</p>
+            <% } %>
+          </div> 
+          <h3>Posts by <%= locals.user.display_name %></h3>
           <%- include("partials/postList") %>
-     </div>
+      </main>
 </body>
 
 </html>

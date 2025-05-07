@@ -1,18 +1,25 @@
 const { validatePost } = require("../validators/validatePost");
 const db = require("../db/queries");
 const { validationResult } = require("express-validator");
+const { formatDistance } = require('date-fns'); 
 
+// Implement pages of posts so we  dont query every single post
 const postsListGet = async (req, res) => {
-  const posts = req.user?.member
+  let posts = req.user?.member
     ? await db.postList()
     : await db.postListNoInfo();
+
+     posts = posts.map((post) => ({
+          ...post,
+          timestamp: post.timestamp ? formatDistance(post.timestamp, Date.now(), { addSuffix: true }) : null,
+     }));
 
   res.render("postsPage", { posts: posts });
 };
 
 const postGet = async (req, res) => {
   const postID = req.params.id;
-  const post = req.user?.member
+  let post = req.user?.member
     ? await db.post(postID)
     : await db.postNoInfo(postID);
 
@@ -20,6 +27,10 @@ const postGet = async (req, res) => {
     const error = new Error("Post not found");
     error.statusCode = 404;
     throw error;
+  }
+
+  if(post.timestamp) {
+       post.timestamp = formatDistance(new Date(post.timestamp), new Date(), { addSuffix: true });
   }
 
   res.render("postPage", { post: post, admin: req.user?.admin });
@@ -42,8 +53,9 @@ const postCreatePost = [
     }
     const { posttitle, postbody } = req.body;
     const id = req.user.id;
-    // console.log(`Title - ${posttitle}`, `Post - ${postbody}`, `ID - ${id}`);
-    await db.addPost(posttitle, postbody, id);
+    const timestamp = new Date()
+//     console.log(`Title - ${posttitle}`, `Post - ${postbody}`, `ID - ${id}, Date - ${timestamp}`);
+    await db.addPost(posttitle, postbody, id, timestamp);
 
     res.redirect("/posts");
   },

@@ -1,10 +1,30 @@
-<ul>
+<ul role="list" class="posts">
      <% locals.posts?.forEach(post => { %>
-          <li>
-               <span><a href="<%- `/posts/${post.id}` %>"><%= post.title %></a></span> <br>
-               <span>By <%= post.user_name || "???" %></span> <br>
-               <span>Posted on <%= (post.timestamp) ? new Date(post.timestamp) : "???" %></span> <br>
-               <span><%= post.text %></span> <br>
+          <li class="post">
+               <div class="title-wrapper">
+                 <h3 class="title"><a href="<%- `/posts/${post.id}` %>"><%= post.title %></a></h3>
+                 <p class="data">
+                    Posted <span class="time"> <%= post.timestamp || "???" %> </span>
+                    <!-- TODO: fix link to user profile -->
+                    by <span class="user">
+            
+                      <% const name = post.user_name || "???" %>
+                      <% if(post.user_id) { %>
+                        <a 
+                        href="/profile/<%-post.user_id%>" >
+                        <%= name %>
+                        </a>
+                      <% } else { %>
+                        <span>
+                          <%= name %>
+                        </span>
+                      <% } %>
+
+                    </span>
+                  </p>
+               </div>
+
+               <p class="content"><%= post.text %></p>
           </li>
      <% }) %>
 </ul>

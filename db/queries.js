@@ -15,7 +15,7 @@ const postList = async () => {
 
 const postListNoInfo = async () => {
   const SQL = `
-     SELECT posts.id, posts.title, posts.text, posts.user_id
+     SELECT posts.id, posts.title, posts.text
      FROM posts 
      JOIN users
      ON (posts.user_id = users.id);
@@ -41,7 +41,7 @@ const postListByUser = async (id) => {
 
 const postListByUserNoInfo = async (id) => {
   const SQL = `
-     SELECT posts.id, posts.title, posts.text, posts.user_id
+     SELECT posts.id, posts.title, posts.text
      FROM posts
      LEFT JOIN users
      ON (posts.user_id = users.id)
@@ -66,7 +66,7 @@ const post = async (post_id) => {
 
 const postNoInfo = async (post_id) => {
   const SQL = `
-     SELECT posts.id, posts.title, posts.text, posts.user_id
+     SELECT posts.id, posts.title, posts.text
      FROM posts JOIN users
      ON (posts.user_id = users.id)
      WHERE posts.id = $1;
@@ -119,12 +119,12 @@ const addUser = async (username, displayName, password) => {
   await pool.query(SQL, [username, displayName, password]);
 };
 
-const addPost = async (title, body, authorID) => {
+const addPost = async (title, body, authorID, timestamp) => {
   const SQL = `
           INSERT INTO posts (title, text, user_id, timestamp) VALUES ($1, $2, $3, $4);
      `;
 
-  await pool.query(SQL, [title, body, authorID, new Date()]);
+  await pool.query(SQL, [title, body, authorID, timestamp]);
 };
 
 const updateUserMember = async (id) => {

@@ -4,17 +4,21 @@
 <head>
      <meta charset="UTF-8">
      <title><%= locals.title %>></title>
+     <link rel="stylesheet" href="/styles/reset.css">
      <link rel="stylesheet" href="/styles/style.css">
 </head>
 
 <body>
      <%- include("partials/nav"); %>
 
-     <form action="<%- locals.route %>" method="POST">
-          <label for="yes"><%- locals.text || "Are you sure about this" %></label>
-          <button id="yes" type="submit">Yes</button>
-          <button type="button" onclick="window.history.back()">No</button>
-     </form>
+     <!-- TODO: make this more interesting like admin page -->
+     <main>
+       <form action="<%- locals.route %>" method="POST">
+            <label for="yes"><%- locals.text || "Are you sure about this" %></label>
+            <button id="yes" type="submit">Yes</button>
+            <button type="button" onclick="window.history.back()">No</button>
+       </form>
+     </main>
 </body>
 
 </html>
